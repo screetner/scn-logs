@@ -10,12 +10,11 @@ export default (app: Elysia) =>
     .post(
       '/logs',
       async ({ body }) => {
-        const { userId, description, status, ipAddress } = body
+        const { userId, description, status } = body
 
         return await logService.createLog({
           userId,
           description,
-          ipAddress,
           status: status as LogStatus,
           timestamp: new Date(),
         })
@@ -24,8 +23,7 @@ export default (app: Elysia) =>
         body: t.Object({
           userId: t.String(),
           description: t.String(),
-          ipAddress: t.String(),
-          status: t.Union([t.Literal('success'), t.Literal('failure')]),
+          status: t.Enum(LogStatus),
         }),
       },
     )

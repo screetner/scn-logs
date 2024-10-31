@@ -64,11 +64,16 @@ export class LogService {
     }
   }
 
-  async getUserLogs(userId: string, limit = 50) {
+  async getUserLogs(userId: string) {
     try {
-      const logs = await LogModel.find({ userId })
+      const sevenDaysAgo = new Date()
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+
+      const logs = await LogModel.find({
+        userId,
+        timestamp: { $gte: sevenDaysAgo },
+      })
         .sort({ timestamp: -1 })
-        .limit(limit)
         .lean()
 
       return {

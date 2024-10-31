@@ -12,10 +12,6 @@ const logSchema = new Schema<ILogDocument>(
       type: String,
       required: true,
     },
-    ipAddress: {
-      type: String,
-      required: true,
-    },
     status: {
       type: String,
       enum: Object.values(LogStatus),

@@ -8,7 +8,6 @@ export enum LogStatus {
 export interface ILog {
   userId: string
   description: string
-  ipAddress: string
   status: LogStatus
   timestamp: Date
 }
