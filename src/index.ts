@@ -1,7 +1,13 @@
-import { Elysia } from "elysia";
+import { Elysia } from 'elysia'
+import { MongoConnection } from './libs/MongoConnection'
+import swagger from '@elysiajs/swagger'
+import LogRoute from './routes/LogRoute'
 
-const app = new Elysia().get("/", () => "Hello Elysia").listen(3000);
+const mongoConnection = MongoConnection.getInstance().connect()
 
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
+const app = new Elysia().use(swagger())
+LogRoute(app)
+
+app.listen(3001, () => {
+  console.log('🚀 Logging service running at http://localhost:3001')
+})
