@@ -42,6 +42,6 @@ export default (app: Elysia) =>
 
       return await logService.getLogs(filter, { skip, limit: limitNum })
     })
-    .get('/api/logs/user/:userId', async ({ params }) => {
+    .get('/logs/user/:userId', async ({ params }) => {
       return await logService.getUserLogs(params.userId)
     })
