@@ -11,6 +11,7 @@ export default (app: Elysia) =>
       '/logs',
       async ({ body }) => {
         const { userId, description, status } = body
+        console.log('userId', userId);
 
         return await logService.createLog({
           userId,
