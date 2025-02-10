@@ -28,7 +28,6 @@ export default (app: Elysia) =>
         }),
       },
     )
-
     .get('/logs', async ({ query }) => {
       const { userId, status, page = '1', limit = '100' } = query
       const filter: FilterQuery<ILogDocument> = {}

@@ -84,4 +84,20 @@ export class LogService {
       throw new Error(`Failed to retrieve user logs`)
     }
   }
+
+  async deleteUserLogs() {
+    try {
+      const sevenDaysAgo = new Date()
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
+
+      await LogModel.deleteMany({ timestamp: { $lt: sevenDaysAgo } }).exec()
+
+      return {
+        success: true,
+        message: 'Logs older than 7 days deleted successfully',
+      }
+    } catch (error) {
+      throw new Error(`Failed to delete logs`)
+    }
+  }
 }
