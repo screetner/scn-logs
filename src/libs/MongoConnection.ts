@@ -26,6 +26,7 @@ export class MongoConnection {
     }
 
     try {
+      console.log('Connecting to MongoDB...')
       await mongoose.connect(DATABASE_CONFIG.uri, DATABASE_CONFIG.options)
       this.isConnected = true
       console.log('Successfully connected to MongoDB')

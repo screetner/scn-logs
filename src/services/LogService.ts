@@ -90,13 +90,13 @@ export class LogService {
       const sevenDaysAgo = new Date()
       sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
 
+      console.log('Deleting logs...')
+
       await LogModel.deleteMany({ timestamp: { $lt: sevenDaysAgo } }).exec()
 
-      return {
-        success: true,
-        message: 'Logs older than 7 days deleted successfully',
-      }
+      console.log('Logs deleted successfully')
     } catch (error) {
+      console.error('Error deleting logs:', error)
       throw new Error(`Failed to delete logs`)
     }
   }
